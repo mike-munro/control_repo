@@ -1,10 +1,14 @@
 class profile::base {
 
-  user {'admin':
-    name       => 'admin',
-    ensure     => present,
-    managehome => true,
-  }
+user { 'dawud':
+  ensure  => 'present',
+  comment => 'David Sastre Medina,,,',
+  gid     => '1001',
+  groups  => ['sudo', 'audio', 'src', 'video', 'libvirt'],
+  home    => '/home/dawud',
+  shell   => '/bin/bash',
+  uid     => '1001',
+}
 
   package { 'vim':
     ensure      => present,
