@@ -1,6 +1,7 @@
 class profile::base {
 
   user {'admin':
+    name       => 'admin',
     ensure     => present,
     managehome => true,
   }
