@@ -1,15 +1,39 @@
-CPUS="4"
-MEMORY="8196"
+# vi: set ft=ruby :
 
-Vagrant.configure("2") do |config|
+# Builds Puppet Master and multiple Puppet Agent Nodes using JSON config file
+# Author: Gary A. Stafford
 
-  config.vm.box = "centos/8"
-  config.vm.hostname = "master.puppet.vm"
-  config.vm.provision "shell", path: "bootstrap.sh"
+# read vm and chef configurations from JSON files
+nodes_config = (JSON.parse(File.read("nodes.json")))['nodes']
 
-  config.vm.provider "virtualbox" do |v|
-    v.name = "master.puppet.vm"
-    v.memory = MEMORY
-    v.cpus = CPUS
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  nodes_config.each do |node|
+    node_name   = node[0] # name of node
+    node_values = node[1] # content of node  
+
+    config.vm.define node_name do |config|
+      config.vm.box = node_values[':image']          
+      ports = node_values['ports']
+      ports.each do |port|
+        config.vm.network :forwarded_port,
+          host:  port[':host'],
+          guest: port[':guest'],
+          id:    port[':id']
+      end
+
+      config.vm.hostname = node_name
+      config.vm.network :private_network, ip: node_values[':ip']
+
+      config.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", node_values[':memory']]
+        vb.customize ["modifyvm", :id, "--name", node_name]
+        vb.customize ["modifyvm", :id, "--cpus", node_values[':cpu']]        
+      end
+
+      config.vm.provision :shell, :path => node_values[':bootstrap']
+    end
   end
 end

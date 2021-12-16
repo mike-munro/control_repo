@@ -1,11 +1,11 @@
 # Base profile for all linux
 class profile::base {
 
-user { 'dawud':
+user { 'mmunro':
   ensure  => 'present',
-  comment => 'David Sastre Medina,,,',
+  comment => 'Munro,,,',
   groups  => ['root'],
-  home    => '/home/dawud',
+  home    => '/home/mmunro',
   shell   => '/bin/bash',
   }
 
