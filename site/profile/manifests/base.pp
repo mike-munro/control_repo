@@ -6,7 +6,7 @@ user { 'dawud':
   groups  => ['root'],
   home    => '/home/dawud',
   shell   => '/bin/bash',
-}
+  }
 
   package { 'vim':
     ensure      => present,
@@ -16,5 +16,5 @@ user { 'dawud':
     ensure  => file,
     content => 'This is a readme, some more info goes here',
     owner   => 'root',
-
+  }
 }
