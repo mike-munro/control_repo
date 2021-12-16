@@ -10,8 +10,8 @@ class profile::base {
     ensure      => present,
   }
 
-  file { '/home/admin/.vimrc':
-    ensure => file,
-    source => 'puppet:///modules/dev_environment/vimrc',
-  }
+  # file { '/home/admin/.vimrc':
+  #   ensure => file,
+  #   source => 'puppet:///modules/dev_environment/vimrc',
+  # }
 }
