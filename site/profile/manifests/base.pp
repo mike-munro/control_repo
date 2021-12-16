@@ -11,4 +11,6 @@ user { 'dawud':
   package { 'vim':
     ensure      => present,
   }
+
+include ngnix
 }
