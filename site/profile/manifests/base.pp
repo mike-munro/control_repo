@@ -1,12 +1,17 @@
 class profile::base {
 
   user {'admin':
-    ensure => present
+    ensure      => present,
+    manage_home => ture,
+    group       => ['wheel'],
   }
 
-  file { '/root/README':
-    ensure  => file,
-    content => 'This is a readme, some more info goes here',
-    owner   => 'root',
+  package { 'vim'}:
+    ensure      => present,
+  }
+
+  file { '/home/admin/.vimrc':
+    ensure      => file,
+    source      => 'puppet:///modules/dev_environment/vimrc',
   }
 }
