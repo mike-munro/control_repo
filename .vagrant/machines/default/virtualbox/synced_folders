@@ -1,1 +1,1 @@
-{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/Users/mlmun/git/control_repo","disabled":false,"__vagrantfile":true}}}
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"C:/Users/mlmun/git/control_repo","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}

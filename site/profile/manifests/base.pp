@@ -1,3 +1,4 @@
+# Base profile for all linux
 class profile::base {
 
 user { 'dawud':

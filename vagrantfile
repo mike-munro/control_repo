@@ -1,15 +1,15 @@
 CPUS="4"
-MEMORY="4096"
+MEMORY="8196"
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "rockylinux/8"
+  config.vm.box = "centos/8"
   config.vm.hostname = "master.puppet.vm"
+  config.vm.provision "shell", path: "bootstrap.sh"
 
   config.vm.provider "virtualbox" do |v|
     v.name = "master.puppet.vm"
     v.memory = MEMORY
     v.cpus = CPUS
   end
-
 end
