@@ -17,20 +17,19 @@ then
     echo "Puppet Agent is already configured. Exiting..."
 else
     /opt/puppetlabs/bin/puppet resource cron puppet-agent ensure=present user=root minute=30
-    #     command='/usr/bin/puppet agent --onetime --no-daemonize --splay'
 
     /opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true
 
     # Configure /etc/hosts file
     echo "" | sudo tee --append /etc/hosts 2> /dev/null && \
     echo "# Host config for Puppet Master and Agent Nodes" | sudo tee --append /etc/hosts 2> /dev/null && \
-    echo "192.168.32.5    puppet.munro.lab  puppet" | sudo tee --append /etc/hosts 2> /dev/null && \
-    echo "192.168.32.10   node01.munro.lab  node01" | sudo tee --append /etc/hosts 2> /dev/null && \
-    echo "192.168.32.20   node02.munro.lab  node02" | sudo tee --append /etc/hosts 2> /dev/null && \
-    echo "192.168.32.30   win01.munro.lab  win01" | sudo tee --append /etc/hosts 2> /dev/null
+    echo "192.168.32.5    master.puppet.lab  master" | sudo tee --append /etc/hosts 2> /dev/null && \
+    echo "192.168.32.10   node01.puppet.lab  node01" | sudo tee --append /etc/hosts 2> /dev/null && \
+    echo "192.168.32.20   node02.puppet.lab  node02" | sudo tee --append /etc/hosts 2> /dev/null && \
+    echo "192.168.32.30   win01.puppet.lab  win01" | sudo tee --append /etc/hosts 2> /dev/null
 
     # Add agent section to /etc/puppet/puppet.conf
-    echo "" && echo "[agent]\nserver=puppet" | sudo tee --append /etc/puppetlabs/puppet.conf 2> /dev/null
+    echo "" && echo "[agent]\nserver=master" | sudo tee --append /etc/puppetlabs/puppet.conf 2> /dev/null
 
     /opt/puppetlabs/bin/puppet agent --enable
 fi

@@ -17,13 +17,13 @@ else
     # Configure /etc/hosts file
     echo "" | sudo tee --append /etc/hosts 2> /dev/null && \
     echo "# Host config for Puppet Master and Agent Nodes" | sudo tee --append /etc/hosts 2> /dev/null && \
-    echo "192.168.32.5    puppet.puppet.lab  puppet" | sudo tee --append /etc/hosts 2> /dev/null && \
+    echo "192.168.32.5    master.puppet.lab  master" | sudo tee --append /etc/hosts 2> /dev/null && \
     echo "192.168.32.10   node01.puppet.lab  node01" | sudo tee --append /etc/hosts 2> /dev/null && \
     echo "192.168.32.20   node02.puppet.lab  node02" | sudo tee --append /etc/hosts 2> /dev/null %% \
     echo "192.168.32.30   win01.puppet.lab  win01" | sudo tee --append /etc/hosts 2> /dev/null
 
     # Add optional alternate DNS names to /etc/puppet/puppet.conf
-    /opt/puppetlabs/bin/puppet config set dns_alt_names 'puppet,puppet.munro.lab' --section main
+    /opt/puppetlabs/bin/puppet config set dns_alt_names 'master,master.puppet.lab' --section main
     
     #Start Puppetserver
     systemctl start puppetserver
