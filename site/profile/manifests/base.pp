@@ -2,7 +2,7 @@ class profile::base {
 
   user {'admin':
     ensure      => present,
-    manage_home => ture,
+    manage_home => true,
     group       => ['wheel'],
   }
 
