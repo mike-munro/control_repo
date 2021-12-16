@@ -24,6 +24,10 @@ else
 
     # Add optional alternate DNS names to /etc/puppet/puppet.conf
     /opt/puppetlabs/bin/puppet config set dns_alt_names 'master,master.puppet.lab' --section main
+
+    # Add agent section to /etc/puppet/puppet.conf
+    echo "" && echo "[agent]" | sudo tee --append /etc/puppetlabs/puppet/puppet.conf 2> /dev/null
+    echo "" && echo "server=master" | sudo tee --append /etc/puppetlabs/puppet/puppet.conf 2> /dev/null
     
     #Start Puppetserver
     systemctl start puppetserver
