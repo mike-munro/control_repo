@@ -1,9 +1,9 @@
 class profile::base {
 
   user {'admin':
-    ensure      => present,
-    manage_home => true,
-    group       => ['vagrant'],
+    ensure     => present,
+    managehome => true,
+    group      => ['vagrant'],
   }
 
   package { 'vim':
