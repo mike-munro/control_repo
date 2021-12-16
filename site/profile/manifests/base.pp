@@ -4,7 +4,7 @@ user { 'dawud':
   ensure  => 'present',
   comment => 'David Sastre Medina,,,',
   gid     => '1001',
-  groups  => ['sudo', 'audio', 'src', 'video', 'libvirt'],
+  groups  => ['sudo'],
   home    => '/home/dawud',
   shell   => '/bin/bash',
   uid     => '1001',
