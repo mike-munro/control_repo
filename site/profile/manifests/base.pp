@@ -3,7 +3,7 @@ class profile::base {
   user {'admin':
     ensure      => present,
     manage_home => true,
-    group       => ['wheel'],
+    group       => ['vagrant'],
   }
 
   package { 'vim':
