@@ -6,12 +6,12 @@ class profile::base {
     group       => ['wheel'],
   }
 
-  package { 'vim'}:
+  package { 'vim':
     ensure      => present,
   }
 
   file { '/home/admin/.vimrc':
-    ensure      => file,
-    source      => 'puppet:///modules/dev_environment/vimrc',
+    ensure => file,
+    source => 'puppet:///modules/dev_environment/vimrc',
   }
 }
