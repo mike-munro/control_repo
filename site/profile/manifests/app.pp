@@ -1,9 +1,6 @@
 # not used 
 class profile::app {
 
-# Import the xml_fragment module
-include xml_fragment
-
 # Define the updated value for the <Server> element
 $updated_server_value = '<Server encrypted="false">new-server-value</Server>'
 
