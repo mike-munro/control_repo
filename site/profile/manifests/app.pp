@@ -10,9 +10,9 @@ class profile::app {
   xml_fragment { 'Hosts':
     ensure  => 'present',
     path    => '/tmp/hosts.xml',
-    xpath   => "/hosts/host[@ip='127.0.0.1']",
+    xpath   => "/PlatformDatabaseConfiguration']",
     content => {
-      value      => 'Localhost',
+      value      => 'Server',
       attributes => {
         'ip' => '127.0.0.1'
       }
