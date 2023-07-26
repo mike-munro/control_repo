@@ -6,8 +6,8 @@ class profile::app {
     path    => '/tmp/server.hsconf',
     xpath   => "/EnvironmentConfiguration/PlatformDatabaseConfiguration/server[@encrypted='false']",
     content => {
-      attributes {
-        'value' => 'test'
+      attributes => {
+        'value' => 'test',
       }
     }
   }
