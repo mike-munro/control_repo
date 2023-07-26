@@ -30,7 +30,7 @@ else
 
     # Add agent section to /etc/puppet/puppet.conf
     echo "" && echo "[agent]" | sudo tee --append /etc/puppetlabs/puppet/puppet.conf 2> /dev/null
-    echo "" && echo "server=master" | sudo tee --append /etc/puppetlabs/puppet/puppet.conf 2> /dev/null
+    echo "" && echo "server=master.puppet.lab" | sudo tee --append /etc/puppetlabs/puppet/puppet.conf 2> /dev/null
 
     /opt/puppetlabs/bin/puppet agent --enable
 fi

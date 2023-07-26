@@ -18,7 +18,7 @@
     },
     "node02.puppet.lab": {
       ":ip": "192.168.32.20",      
-      ":image": "bento/ubuntu-20.04",      
+      ":image": "cdaf/WindowsServerCore",      
       "ports": [],
       ":cpu": 2,      
       ":memory": 1024,
