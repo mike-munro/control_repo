@@ -7,7 +7,7 @@ class profile::app {
     xpath   => "/EnvironmentConfiguration/PlatformDatabaseConfiguration/server[@encrypted='false']",
     content => {
       attributes => {
-        'value' => 'tasfdghjkhlgjfhdhsgafest',
+        "Server encrypted='false'" => 'yeeeahhhboy',
       }
     }
   }
