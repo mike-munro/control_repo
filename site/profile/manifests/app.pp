@@ -8,7 +8,7 @@ class profile::app {
 
 # Apply the updated value using the xml_fragment::fragment resource
 xml_fragment { 'update_server_value':
-  target     => '/tmp/server.hsconf',  # Replace with the actual path to your XML file
+  path       => '/tmp/server.hsconf',  # Replace with the actual path to your XML file
   xpath      => '/EnvironmentConfiguration/PlatformDatabaseConfiguration/Server',
   value      => '<Server encrypted="false">new-server-value</Server>',
   selboolean => true,
