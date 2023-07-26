@@ -11,6 +11,7 @@ class profile::app {
         attributes => {
             'Server' => 'ballssssitsworking',
         }
+    }
   }
 
 }
