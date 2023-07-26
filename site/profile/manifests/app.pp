@@ -7,16 +7,15 @@ class profile::app {
   }
 
 
-  xml_fragment { 'Hosts':
+  xml_fragment { 'server.hsconf':
     ensure  => 'present',
-    path    => '/tmp/hosts.xml',
-    xpath   => "/PlatformDatabaseConfiguration']",
+    path    => '/tmp/server.hsconf',
+    xpath   => "/EnvironmentConfiguration/PlatformDatabaseConfiguration']",
     content => {
       value      => 'Server',
       attributes => {
-        'ip' => '127.0.0.1'
+        'Server' => '127.0.0.1'
       }
     }
   }
 }
-
