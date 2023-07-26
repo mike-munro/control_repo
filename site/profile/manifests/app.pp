@@ -1,6 +1,13 @@
 # not used 
 class profile::app {
 
+xml_fragment { 'Hosts':
+    ensure => 'present',
+    path   => 'C:/hosts.xml',
+    xpath  => '/hosts',
+    purge  => true
+}
+
 xml_fragment { 'Localhost Host':
     ensure  => 'present',
     path    => '/tmp/hosts.xml',
