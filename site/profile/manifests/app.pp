@@ -1,6 +1,5 @@
 # not used 
 class profile::app {
-
   xml_fragment { 'appsetting':
     ensure  => 'present',
     path    => '/tmp/server.hsconf',
@@ -8,7 +7,7 @@ class profile::app {
     content => {
       attributes => {
         "Server encrypted='false'" => 'yeeeahhhboy',
-      }
-    }
+      },
+    },
   }
 }

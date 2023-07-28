@@ -6,6 +6,7 @@ if ps aux | grep "puppet agent" | grep -v grep 2> /dev/null
 then
     echo "Puppet Agent is already installed. Moving on..."
 else
+    hostname node01
     curl -O https://apt.puppet.com/puppet-release-focal.deb
     apt-get install ./puppet-release-focal.deb
     apt-get update
