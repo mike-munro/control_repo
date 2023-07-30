@@ -36,20 +36,6 @@ class profile::win_base {
     ensure => 'directory',
   }
 
-# Set Permissions
-
-  acl { 'c:\\inetpub\\complete':
-    permissions => [
-      { 'identity' => 'IISCompleteGroup', 'rights' => ['read', 'execute'] },
-    ],
-  }
-
-  acl { 'c:\\inetpub\\complete_vdir':
-    permissions => [
-      { 'identity' => 'IISCompleteGroup', 'rights' => ['read', 'execute'] },
-    ],
-  }
-
 # Configure IIS
 
   iis_application_pool { 'complete_site_app_pool':
