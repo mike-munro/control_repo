@@ -49,9 +49,8 @@ class profile::win_base {
 
 # Add ISAPI filter using augeas
   exec { 'add_isapi_filter':
-    command  => 'appcmd.exe set config -section:system.webServer/isapiFilters /+"[name=\'SalesQueryIsapi\',path=\'c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll\',enabled=\'True\',enableCache=\'True\']" /commit:apphost',
-    unless   => 'appcmd.exe list config -section:system.webServer/isapiFilters | grep SalesQueryIsapi',
-    path     => 'C:/Windows/System32/inetsrv',
+    command  => 'C:\\Windows\\System32\\inetsrv\\appcmd.exe set config -section:system.webServer/isapiFilters /+"[name=\'SalesQueryIsapi\',path=\'c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll\',enabled=\'True\',enableCache=\'True\']" /commit:apphost',
+    unless   => 'C:\\Windows\\System32\\inetsrv\\appcmd.exe list config -section:system.webServer/isapiFilters | findstr "SalesQueryIsapi"',
     provider => 'windows',
   }
 }
