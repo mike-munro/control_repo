@@ -4,10 +4,4 @@ class profile::powershell {
     provider => 'powershell',
     creates  => 'C:/Program Files/PackageManagement/ProviderAssemblies/NuGet',
   }
-
-  exec { 'import_nuget_provider':
-    command  => 'Import-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force',
-    provider => 'powershell',
-    require  => Exec['install_nuget_provider'],
-  }
 }
