@@ -26,31 +26,67 @@ class profile::win_base {
     provider => 'chocolatey',
   }
 
-# Delete the default website to prevent a port binding conflict.
-  iis_site { 'Default Web Site':
-    ensure  => absent,
-    require => Iis_feature['Web-WebServer'],
+# Create Directories
+
+  file { 'c:\\inetpub\\complete':
+    ensure => 'directory',
   }
 
-  iis_site { 'minimal':
-    ensure          => 'started',
-    physicalpath    => 'c:\\inetpub\\minimal',
-    applicationpool => 'DefaultAppPool',
-    require         => [
-      File['minimal'],
-      Iis_site['Default Web Site']
+  file { 'c:\\inetpub\\complete_vdir':
+    ensure => 'directory',
+  }
+
+# Set Permissions
+
+  acl { 'c:\\inetpub\\complete':
+    permissions => [
+      { 'identity' => 'IISCompleteGroup', 'rights' => ['read', 'execute'] },
     ],
   }
 
-  file { 'minimal':
-    ensure => 'directory',
-    path   => 'c:\\inetpub\\minimal',
+  acl { 'c:\\inetpub\\complete_vdir':
+    permissions => [
+      { 'identity' => 'IISCompleteGroup', 'rights' => ['read', 'execute'] },
+    ],
   }
 
-  exec { 'install_xwebadministration_module':
-    command  => 'Install-Module -Name xWebAdministration -Force',
-    provider => 'powershell',
-    unless   => 'Get-Module -Name xWebAdministration -ListAvailable',
+# Configure IIS
+
+  iis_application_pool { 'complete_site_app_pool':
+    ensure                  => 'present',
+    state                   => 'started',
+    managed_pipeline_mode   => 'Integrated',
+    managed_runtime_version => 'v4.0',
+  }
+
+# Application Pool No Managed Code .Net CLR Version set up
+  iis_application_pool { 'test_app_pool':
+    ensure                    => 'present',
+    enable32_bit_app_on_win64 => true,
+    managed_runtime_version   => '',
+    managed_pipeline_mode     => 'Classic',
+    start_mode                => 'AlwaysRunning',
+  }
+
+  iis_site { 'complete':
+    ensure           => 'started',
+    physicalpath     => 'c:\\inetpub\\complete',
+    applicationpool  => 'complete_site_app_pool',
+    enabledprotocols => 'http',
+    bindings         => [
+      {
+        'bindinginformation' => '*:80:',
+        'protocol'           => 'http',
+      },
+    ],
+    require          => File['c:\\inetpub\\complete'],
+  }
+
+  iis_virtual_directory { 'vdir':
+    ensure       => 'present',
+    sitename     => 'complete',
+    physicalpath => 'c:\\inetpub\\complete_vdir',
+    require      => File['c:\\inetpub\\complete_vdir'],
   }
 
   # exec { 'add_isapi_filter':
@@ -65,7 +101,7 @@ class profile::win_base {
     content => {
       'filter' => {
         '@name'        => 'SalesQueryIsapi',
-        '@path'        => 'c:\Inetpub\minimal\filters\SalesQueryIsapi.dll',
+        '@path'        => 'c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll',
         '@enabled'     => 'true',
         '@enableCache' => 'true',
       },
