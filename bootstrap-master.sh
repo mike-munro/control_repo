@@ -53,6 +53,10 @@ else
     # Install r10k via gem
     gem install r10k
 
+    # powershell
+    gem install ruby-pwsh
+
+
     # Run first repo pull
     r10k deploy environment production
 fi
