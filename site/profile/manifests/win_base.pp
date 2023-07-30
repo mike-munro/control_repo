@@ -9,14 +9,8 @@ class profile::win_base {
     content => 'This is a readme, some more info goes here',
   }
 
-# Install the package
-  package { 'git':
-    ensure   => installed,
-    provider => 'chocolatey',
-  }
-
   $iis_features = ['Web-WebServer','Web-Scripting-Tools','Web-Mgmt-Console','Web-ISAPI-Ext','Web-ISAPI-Filter']
-  $packages = ['microsoft-edge', 'notepadplusplus']
+  $packages = ['git', 'microsoft-edge', 'notepadplusplus']
 
   iis_feature { $iis_features:
     ensure => 'present',
