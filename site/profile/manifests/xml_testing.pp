@@ -1,5 +1,9 @@
 # not used 
-class profile::app {
+class profile::xml_testing {
+  file { '/tmp/server.hsconf':
+    ensure => file,
+  }
+
   xml_fragment { 'appsetting':
     ensure  => 'present',
     path    => '/tmp/server.hsconf',

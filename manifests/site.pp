@@ -8,7 +8,3 @@ node 'master.puppet.vm' {
 node /^node01.*/ {
   include role::app_server
 }
-
-node /^node02*/ {
-  include role::db_server
-}

@@ -12,7 +12,7 @@ class profile::base {
     ensure      => present,
   }
 
-  file { '/root/README':
+  file { '/tmp/README':
     ensure  => file,
     content => 'This is a readme, some more info goes here',
     owner   => 'root',

@@ -35,10 +35,8 @@ else
     echo "" && echo "autosign_filenames = /etc/puppetlabs/puppet/autosign.conf" | sudo tee --append /etc/puppetlabs/puppet/puppet.conf 2> /dev/null
 
     # Create autosign.conf file and add node names to be autosigned (replace with actual node names)
-    echo "node01.puppet.lab" | sudo tee /etc/puppetlabs/puppet/autosign.conf
-    echo "node02.puppet.lab" | sudo tee --append /etc/puppetlabs/puppet/autosign.conf
-    echo "windows.puppet.lab" | sudo tee --append /etc/puppetlabs/puppet/autosign.conf
-    echo "win2016.puppet.lab" | sudo tee --append /etc/puppetlabs/puppet/autosign.conf
+    echo "node01" | sudo tee /etc/puppetlabs/puppet/autosign.conf
+    echo "win2016" | sudo tee --append /etc/puppetlabs/puppet/autosign.conf
 
     # Start Puppetserver
     systemctl start puppetserver
