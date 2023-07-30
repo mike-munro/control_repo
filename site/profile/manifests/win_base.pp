@@ -59,17 +59,11 @@ class profile::win_base {
   #   provider => 'powershell',
   # }
 
-  augeas { 'ISAPIFilterExample':
-    lens    => 'Xml.lns',
-    incl    => 'C:/Inetpub/wwwroot/web.config',
-    context => '/files/C:/Inetpub/wwwroot/web.config/system.webServer/isapiFilters',
-    changes => [
-      'set filter[#attribute/name] SalesQueryIsapi',
-      'set filter/#attribute/path c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll',
-      'set filter/#attribute/enabled true',
-      'set filter/#attribute/enableCache true',
-    ],
+  xml_fragment { 'SalesQueryIsapi':
+    ensure  => present,
+    xpath   => '/configuration/system.webServer/isapiFilters/filter[@name="SalesQueryIsapi"]',
+    content => '<filter name="SalesQueryIsapi" path="c:\Inetpub\minimal\filters\SalesQueryIsapi.dll" enabled="true" enableCache="true" />',
+    target  => 'C:/Inetpub/wwwroot/web.config',
+    notify  => Service['iis'],
   }
-
-
 }
