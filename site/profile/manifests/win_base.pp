@@ -48,7 +48,7 @@ class profile::win_base {
   }
 
   package { 'augeas':
-    ensure => installed,
+    ensure   => installed,
     provider => 'chocolatey',
   }
 
