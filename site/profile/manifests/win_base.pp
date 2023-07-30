@@ -57,7 +57,7 @@ class profile::win_base {
     dsc_resource_name       => 'xWebISAPIFilter',
     dsc_resource_module     => 'xWebAdministration',
     dsc_resource_properties => {
-      Name        => 'SalesQueryIsapi',
+      FilterName  => 'SalesQueryIsapi',
       Path        => 'c:\\Inetpub\\www.contoso.com\\filters\\SalesQueryIsapi.dll',
       Ensure      => 'Present',
       Enabled     => true,
