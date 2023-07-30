@@ -1,12 +1,11 @@
 # Base profile for all linux
 class profile::base {
-
-user { 'mmunro':
-  ensure  => 'present',
-  comment => 'Munro,,,',
-  groups  => ['root'],
-  home    => '/home/mmunro',
-  shell   => '/bin/bash',
+  user { 'bob':
+    ensure  => 'present',
+    comment => 'Bob,,,',
+    groups  => ['root'],
+    home    => '/home/bob',
+    shell   => '/bin/bash',
   }
 
   package { 'vim':
