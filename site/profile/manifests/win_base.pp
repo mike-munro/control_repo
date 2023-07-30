@@ -52,15 +52,16 @@ class profile::win_base {
     provider => 'powershell',
     unless   => 'powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "Get-Module -Name xWebAdministration -ListAvailable"',
   }
-  dsc_lite { 'ISAPIFilterExample':
-    dsc_resource_name       => 'xWebISAPIFilter',
-    dsc_resource_module     => 'xWebAdministration',
-    dsc_resource_properties => {
-      Name        => 'SalesQueryIsapi',
-      Path        => 'c:\\Inetpub\\www.contoso.com\\filters\\SalesQueryIsapi.dll',
-      Ensure      => 'Present',
-      Enabled     => true,
-      EnableCache => true,
-    },
-  }
+
+  # dsc_lite { 'ISAPIFilterExample':
+  #   dsc_resource_name       => 'xWebISAPIFilter',
+  #   dsc_resource_module     => 'xWebAdministration',
+  #   dsc_resource_properties => {
+  #     Name        => 'SalesQueryIsapi',
+  #     Path        => 'c:\\Inetpub\\www.contoso.com\\filters\\SalesQueryIsapi.dll',
+  #     Ensure      => 'Present',
+  #     Enabled     => true,
+  #     EnableCache => true,
+  #   },
+  # }
 }
