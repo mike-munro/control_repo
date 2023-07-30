@@ -47,13 +47,11 @@ class profile::win_base {
     path   => 'c:\\inetpub\\minimal',
   }
 
-exec { 'install_xwebadministration_module':
-  command  => 'powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "Install-Module -Name xWebAdministration -Force"',
-  provider => 'powershell',
-  unless   => 'powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "Get-Module -Name xWebAdministration -ListAvailable"',
-}
-
-
+  exec { 'install_xwebadministration_module':
+    command  => 'powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "Install-Module -Name xWebAdministration -Force"',
+    provider => 'powershell',
+    unless   => 'powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "Get-Module -Name xWebAdministration -ListAvailable"',
+  }
   dsc_lite { 'ISAPIFilterExample':
     dsc_resource_name       => 'xWebISAPIFilter',
     dsc_resource_module     => 'xWebAdministration',
