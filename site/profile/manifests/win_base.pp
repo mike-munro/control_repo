@@ -15,7 +15,7 @@ class profile::win_base {
     provider => 'chocolatey',
   }
 
-  $iis_features = ['Web-WebServer','Web-Scripting-Tools','Web-Mgmt-Console']
+  $iis_features = ['Web-WebServer','Web-Scripting-Tools','Web-Mgmt-Console','Web-ISAPI-Ext','Web-ISAPI-Filter']
 
   iis_feature { $iis_features:
     ensure => 'present',
