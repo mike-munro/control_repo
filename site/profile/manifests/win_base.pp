@@ -46,4 +46,11 @@ class profile::win_base {
     ensure => 'directory',
     path   => 'c:\\inetpub\\minimal',
   }
+
+  exec { 'add_isapi_filter':
+    command  => 'appcmd.exe set config -section:system.webServer/isapiFilters /+"[name=\'SalesQueryIsapi\',path=\'c:\Inetpub\minimal\filters\SalesQueryIsapi.dll\',enabled=\'True\',enableCache=\'True\']" /commit:apphost',
+    provider => 'shell',
+    unless   => 'appcmd.exe list config -section:system.webServer/isapiFilters | grep SalesQueryIsapi',
+    path     => 'C:/Windows/System32',
+  }
 }
