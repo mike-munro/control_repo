@@ -47,10 +47,15 @@ class profile::win_base {
     path   => 'c:\\inetpub\\minimal',
   }
 
-# Add ISAPI filter using augeas
-  exec { 'add_isapi_filter':
-    command  => 'C:\\Windows\\System32\\inetsrv\\appcmd.exe set config -section:system.webServer/isapiFilters /+"[name=\'SalesQueryIsapi\',path=\'c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll\',enabled=\'True\',enableCache=\'True\']" /commit:apphost',
-    unless   => 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -command "if ((C:\\Windows\\System32\\inetsrv\\appcmd.exe list config -section:system.webServer/isapiFilters) -match \'name: SalesQueryIsapi\') { exit 1 }"',
-    provider => 'windows',
+  dsc_lite { 'ISAPIFilterExample':
+    dsc_resource_name       => 'xWebISAPIFilter',
+    dsc_resource_module     => 'xWebAdministration',
+    dsc_resource_properties => {
+      Name        => 'SalesQueryIsapi',
+      Path        => 'c:\\Inetpub\\www.contoso.com\\filters\\SalesQueryIsapi.dll',
+      Ensure      => 'Present',
+      Enabled     => true,
+      EnableCache => true,
+    },
   }
 }
