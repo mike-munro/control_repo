@@ -15,6 +15,10 @@ class profile::win_base {
     ensure => 'present',
   }
 
+  package { 'microsoft-edge':
+    ensure => 'present',
+  }
+
 # Delete the default website to prevent a port binding conflict.
   iis_site { 'Default Web Site':
     ensure  => absent,
