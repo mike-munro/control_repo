@@ -4,14 +4,14 @@ class profile::xml_testing {
     ensure => file,
   }
 
-  xml_fragment { 'appsetting':
-    ensure  => 'present',
-    path    => '/tmp/server.hsconf',
-    xpath   => "/EnvironmentConfiguration/PlatformDatabaseConfiguration/server[@encrypted='false']",
-    content => {
-      attributes => {
-        "Server encrypted='false'" => 'yeeeahhhboy',
-      },
-    },
-  }
+  # xml_fragment { 'appsetting':
+  #   ensure  => 'present',
+  #   path    => '/tmp/server.hsconf',
+  #   xpath   => "/EnvironmentConfiguration/PlatformDatabaseConfiguration/server[@encrypted='false']",
+  #   content => {
+  #     attributes => {
+  #       "Server encrypted='false'" => 'yeeeahhhboy',
+  #     },
+  #   },
+  # }
 }
