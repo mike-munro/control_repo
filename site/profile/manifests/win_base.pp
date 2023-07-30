@@ -48,9 +48,9 @@ class profile::win_base {
   }
 
   exec { 'install_xwebadministration_module':
-    command  => 'powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "Install-Module -Name xWebAdministration -Force"',
+    command  => 'Install-Module -Name xWebAdministration -Force',
     provider => 'powershell',
-    unless   => 'powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "Get-Module -Name xWebAdministration -ListAvailable"',
+    unless   => 'Get-Module -Name xWebAdministration -ListAvailable',
   }
 
   dsc { 'ISAPIFilterExample':
