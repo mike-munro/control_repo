@@ -21,7 +21,7 @@ else
     echo "192.168.32.5    master.puppet.lab  master" | sudo tee --append /etc/hosts 2> /dev/null && \
     echo "192.168.32.10   node01.puppet.lab  node01" | sudo tee --append /etc/hosts 2> /dev/null && \
     echo "192.168.32.20   node02.puppet.lab  node02" | sudo tee --append /etc/hosts 2> /dev/null %% \
-    echo "192.168.32.30   win01.puppet.lab  win01" | sudo tee --append /etc/hosts 2> /dev/null
+    echo "192.168.32.30   win2019.puppet.lab win2019" | sudo tee --append /etc/hosts 2> /dev/null
 
     # Add optional alternate DNS names to /etc/puppet/puppet.conf
     /opt/puppetlabs/bin/puppet config set dns_alt_names 'master,master.puppet.lab' --section main
@@ -36,7 +36,7 @@ else
 
     # Create autosign.conf file and add node names to be autosigned (replace with actual node names)
     echo "node01" | sudo tee /etc/puppetlabs/puppet/autosign.conf
-    echo "win2016" | sudo tee --append /etc/puppetlabs/puppet/autosign.conf
+    echo "win2019" | sudo tee --append /etc/puppetlabs/puppet/autosign.conf
 
     # Start Puppetserver
     systemctl start puppetserver

@@ -9,6 +9,6 @@ node /^node01.*/ {
   include role::app_server
 }
 
-node 'win2016' {
+node 'win2019' {
   include role::app_server
 }
