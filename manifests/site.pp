@@ -8,3 +8,7 @@ node 'master.puppet.vm' {
 node /^node01.*/ {
   include role::app_server
 }
+
+node 'win2016' {
+  include role::app_server
+}
