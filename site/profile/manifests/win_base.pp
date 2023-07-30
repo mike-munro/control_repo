@@ -16,7 +16,7 @@ class profile::win_base {
   }
 
   $iis_features = ['Web-WebServer','Web-Scripting-Tools','Web-Mgmt-Console','Web-ISAPI-Ext','Web-ISAPI-Filter']
-  $packages = ['microsoft-edge', 'notepad-plus-plus']
+  $packages = ['microsoft-edge', 'notepadplusplus']
 
   iis_feature { $iis_features:
     ensure => 'present',
