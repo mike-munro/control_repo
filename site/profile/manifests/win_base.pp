@@ -17,6 +17,7 @@ class profile::win_base {
 
   package { 'microsoft-edge':
     ensure => 'present',
+    source => 'chocolatey',
   }
 
 # Delete the default website to prevent a port binding conflict.
