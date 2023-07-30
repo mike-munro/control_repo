@@ -50,7 +50,7 @@ class profile::win_base {
 # Add ISAPI filter using augeas
   exec { 'add_isapi_filter':
     command  => 'C:\\Windows\\System32\\inetsrv\\appcmd.exe set config -section:system.webServer/isapiFilters /+"[name=\'SalesQueryIsapi\',path=\'c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll\',enabled=\'True\',enableCache=\'True\']" /commit:apphost',
-    unless   => 'powershell -command "if ((C:\\Windows\\System32\\inetsrv\\appcmd.exe list config -section:system.webServer/isapiFilters) -match \'name: SalesQueryIsapi\') { exit 1 }"',
+    unless   => 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -command "if ((C:\\Windows\\System32\\inetsrv\\appcmd.exe list config -section:system.webServer/isapiFilters) -match \'name: SalesQueryIsapi\') { exit 1 }"',
     provider => 'windows',
   }
 }
