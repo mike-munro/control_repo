@@ -1,7 +1,7 @@
 # Base profile for all linux
 class profile::win_base {
   file { 'c://temp':
-    encure => directory,
+    ensure => directory,
   }
   file { 'c://temp/README.txt':
     ensure  => file,
