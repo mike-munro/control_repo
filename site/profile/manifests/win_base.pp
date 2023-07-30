@@ -47,10 +47,18 @@ class profile::win_base {
     path   => 'c:\\inetpub\\minimal',
   }
 
-  exec { 'add_isapi_filter':
-    command  => 'appcmd.exe set config -section:system.webServer/isapiFilters /+"[name=\'SalesQueryIsapi\',path=\'c:\Inetpub\minimal\filters\SalesQueryIsapi.dll\',enabled=\'True\',enableCache=\'True\']" /commit:apphost',
-    provider => 'shell',
-    unless   => 'appcmd.exe list config -section:system.webServer/isapiFilters | grep SalesQueryIsapi',
-    path     => 'C:/Windows/System32',
+  package { 'augeas':
+    ensure => installed,
+  }
+
+  augeas { 'iis_isapi_filter':
+    context => '/files/C:/Windows/System32/inetsrv/config/applicationHost.config',
+    changes => [
+      "set system.webServer/isapiFilters/+'[name=\'SalesQueryIsapi\']' 'filter'",
+      "set system.webServer/isapiFilters/add[@name='SalesQueryIsapi']/@path 'c:/Inetpub/www.contoso.com/filters/SalesQueryIsapi.dll'",
+      "set system.webServer/isapiFilters/add[@name='SalesQueryIsapi']/@enabled 'True'",
+      "set system.webServer/isapiFilters/add[@name='SalesQueryIsapi']/@enableCache 'True'",
+    ],
+    onlyif  => "match system.webServer/isapiFilters/add[@name='SalesQueryIsapi'] size == 0",
   }
 }
