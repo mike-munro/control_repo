@@ -97,7 +97,7 @@ class profile::win_base {
     notify  => Service['iis'],
   }
 
-  service { 'iis':
+  service { 'W3SVC':
     ensure => 'running',  # or 'stopped' to ensure it is stopped
     enable => true,       # Set to true to start the service at system boot
   }
