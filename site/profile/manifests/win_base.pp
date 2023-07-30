@@ -53,15 +53,9 @@ class profile::win_base {
     unless   => 'Get-Module -Name xWebAdministration -ListAvailable',
   }
 
-  dsc { 'ISAPIFilterExample':
-    dsc_resource_name       => 'xWebISAPIFilter',
-    dsc_resource_module     => 'xWebAdministration',
-    dsc_resource_properties => {
-      FilterName  => 'SalesQueryIsapi',
-      Path        => 'c:\\Inetpub\\www.contoso.com\\filters\\SalesQueryIsapi.dll',
-      Ensure      => 'Present',
-      Enabled     => true,
-      EnableCache => true,
-    },
+  exec { 'add_isapi_filter':
+    command  => 'C:/Windows/System32/inetsrv/appcmd.exe set config -section:system.webServer/isapiFilters /+"[name=\'SalesQueryIsapi\',path=\'c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll\',enabled=\'True\',enableCache=\'True\']" /commit:apphost',
+    onlyif   => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command "(C:/Windows/System32/inetsrv/appcmd.exe list config -section:system.webServer/isapiFilters) -notmatch \'name: SalesQueryIsapi\'"',
+    provider => 'powershell',
   }
 }
