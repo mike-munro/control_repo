@@ -61,9 +61,16 @@ class profile::win_base {
 
   xml_fragment { 'SalesQueryIsapi':
     ensure  => present,
-    xpath   => '/configuration/system.webServer/isapiFilters/filter[@name="SalesQueryIsapi"]',
-    content => '<filter name="SalesQueryIsapi" path="c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll" enabled="true" enableCache="true" />',
-    path    => 'C:/Inetpub/wwwroot/web.config',
+    xpath   => '/configuration/system.webServer/isapiFilters',
+    content => {
+      'filter' => {
+        '@name'        => 'SalesQueryIsapi',
+        '@path'        => 'c:\Inetpub\minimal\filters\SalesQueryIsapi.dll',
+        '@enabled'     => 'true',
+        '@enableCache' => 'true',
+      },
+    },
+    path    => 'C://Inetpub//wwwroot//web.config',
     notify  => Service['iis'],
   }
 
