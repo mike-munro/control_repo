@@ -9,6 +9,12 @@ class profile::win_base {
     content => 'This is a readme, some more info goes here',
   }
 
+# Install the package
+  package { 'git':
+    ensure   => installed,
+    provider => 'chocolatey',
+  }
+
   $iis_features = ['Web-WebServer','Web-Scripting-Tools','Web-Mgmt-Console']
 
   iis_feature { $iis_features:
@@ -16,8 +22,8 @@ class profile::win_base {
   }
 
   package { 'microsoft-edge':
-    ensure => 'present',
-    source => 'chocolatey',
+    ensure   => installed,
+    provider => 'chocolatey',
   }
 
 # Delete the default website to prevent a port binding conflict.
