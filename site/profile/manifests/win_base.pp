@@ -47,19 +47,11 @@ class profile::win_base {
     path   => 'c:\\inetpub\\minimal',
   }
 
-  package { 'augeas':
-    ensure   => installed,
-    provider => 'chocolatey',
-  }
-
-  augeas { 'iis_isapi_filter':
-    context => '/files/C:/Windows/System32/inetsrv/config/applicationHost.config',
-    changes => [
-      "set system.webServer/isapiFilters/+'[name=\'SalesQueryIsapi\']' 'filter'",
-      "set system.webServer/isapiFilters/add[@name='SalesQueryIsapi']/@path 'c:/Inetpub/www.contoso.com/filters/SalesQueryIsapi.dll'",
-      "set system.webServer/isapiFilters/add[@name='SalesQueryIsapi']/@enabled 'True'",
-      "set system.webServer/isapiFilters/add[@name='SalesQueryIsapi']/@enableCache 'True'",
-    ],
-    onlyif  => "match system.webServer/isapiFilters/add[@name='SalesQueryIsapi'] size == 0",
+# Add ISAPI filter using augeas
+  exec { 'add_isapi_filter':
+    command  => 'appcmd.exe set config -section:system.webServer/isapiFilters /+"[name=\'SalesQueryIsapi\',path=\'c:\Inetpub\www.contoso.com\filters\SalesQueryIsapi.dll\',enabled=\'True\',enableCache=\'True\']" /commit:apphost',
+    onlyif   => 'appcmd.exe list config -section:system.webServer/isapiFilters | findstr "name: SalesQueryIsapi"',
+    path     => 'C:/Windows/System32/inetsrv',
+    provider => 'windows',
   }
 }
