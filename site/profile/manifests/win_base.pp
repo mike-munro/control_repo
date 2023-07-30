@@ -49,6 +49,7 @@ class profile::win_base {
 
   package { 'augeas':
     ensure => installed,
+    provider => 'chocolatey',
   }
 
   augeas { 'iis_isapi_filter':
