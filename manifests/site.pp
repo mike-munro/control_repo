@@ -10,5 +10,5 @@ node /^node01.*/ {
 }
 
 node 'win2019' {
-  include role::app_server
+  include role::windows
 }
