@@ -2,8 +2,6 @@
 class profile::win_base {
   file { 'c://temp':
     ensure => directory,
-    mode   => '7770',
-    group  => 'Administrators',
   }
   file { 'c://temp/README.txt':
     ensure  => file,
