@@ -92,7 +92,7 @@ class profile::win_base {
         '@enableCache' => 'true',
       },
     },
-    path    => 'C://Inetpub//wwwroot//web.config',
+    path    => 'C:\\Windows\\System32\\Inetsrv\\Config\\ApplicationHost.config',
     notify  => Service['iis'],
   }
 
