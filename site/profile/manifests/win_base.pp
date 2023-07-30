@@ -53,9 +53,23 @@ class profile::win_base {
     unless   => 'Get-Module -Name xWebAdministration -ListAvailable',
   }
 
-  exec { 'add_isapi_filter':
-    command  => 'C:/Windows/System32/inetsrv/appcmd.exe set config -section:system.webServer/isapiFilters /+"[name=\'SalesQueryIsapi\',path=\'c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll\',enabled=\'True\',enableCache=\'True\']" /commit:apphost',
-    onlyif   => '(C:/Windows/System32/inetsrv/appcmd.exe list config -section:system.webServer/isapiFilters) -notmatch \'SalesQueryIsapi\'',
-    provider => 'powershell',
+  # exec { 'add_isapi_filter':
+  #   command  => 'C:/Windows/System32/inetsrv/appcmd.exe set config -section:system.webServer/isapiFilters /+"[name=\'SalesQueryIsapi\',path=\'c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll\',enabled=\'True\',enableCache=\'True\']" /commit:apphost',
+  #   onlyif   => '(C:/Windows/System32/inetsrv/appcmd.exe list config -section:system.webServer/isapiFilters) -notmatch \'SalesQueryIsapi\'',
+  #   provider => 'powershell',
+  # }
+
+  augeas { 'ISAPIFilterExample':
+    lens    => 'Xml.lns',
+    incl    => 'C:/Inetpub/wwwroot/web.config',
+    context => '/files/C:/Inetpub/wwwroot/web.config/system.webServer/isapiFilters',
+    changes => [
+      'set filter[#attribute/name] SalesQueryIsapi',
+      'set filter/#attribute/path c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll',
+      'set filter/#attribute/enabled true',
+      'set filter/#attribute/enableCache true',
+    ],
   }
+
+
 }
