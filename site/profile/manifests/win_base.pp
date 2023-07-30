@@ -66,4 +66,9 @@ class profile::win_base {
     path    => 'C:/Inetpub/wwwroot/web.config',
     notify  => Service['iis'],
   }
+
+  service { 'iis':
+    ensure => 'running',  # or 'stopped' to ensure it is stopped
+    enable => true,       # Set to true to start the service at system boot
+  }
 }
