@@ -78,7 +78,7 @@ class profile::win_base {
 
   xml_fragment { 'SalesQueryIsapi':
     ensure  => present,
-    xpath   => '/configuration/location[@path="complete"]/system.webServer/isapiFilters',
+    xpath   => '/configuration/location/system.webServer/isapiFilters',
     content => {
       'filter' => {
         '@name'         => 'SalesQueryIsapi',
