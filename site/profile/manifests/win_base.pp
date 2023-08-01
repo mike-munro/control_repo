@@ -123,6 +123,6 @@ class profile::win_base {
     dsc_ensure        => 'present',
     dsc_configsection => "system.webServer/isapiFilters/add[@name='OutSystems ISAPI Filter']",
     dsc_value         => "path='${isapifilterpath}', preCondition='bitness64'",
-    dsc_websitepath   => 'Default Web Site',
+    dsc_websitepath   => 'IIS:\\Sites\\Default Web Site',
   }
 }
