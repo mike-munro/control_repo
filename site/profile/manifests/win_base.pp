@@ -104,10 +104,16 @@ class profile::win_base {
   #   },
   # }
 
-  # Ensure the xWebAdministration module is installed (if not already installed)
+# Install the NuGet package provider for Puppet
+  package { 'nuget':
+    ensure   => installed,
+    provider => 'chocolatey',
+  }
+
+# Install the xWebAdministration module using NuGet
   package { 'xWebAdministration':
     ensure   => installed,
-    provider => 'powershell',
+    provider => 'nuget',
   }
 
   # Define the path for the ISAPI filter DLL
