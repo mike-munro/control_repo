@@ -81,8 +81,8 @@ class profile::win_base {
     xpath   => '/configuration/location[@path="complete"]/system.webServer/isapiFilters',
     content => {
       'filter' => {
-        '@name' => 'SalesQueryIsapi',
-        '@path' => 'c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll',
+        '@name'         => 'SalesQueryIsapi',
+        '@path'         => 'c:/Inetpub/minimal/filters/SalesQueryIsapi.dll',
         '@preCondition' => 'bitness32',
       },
     },
