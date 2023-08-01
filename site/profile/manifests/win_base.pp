@@ -92,7 +92,7 @@ class profile::win_base {
 
   xml_fragment { 'SalesQueryIsapi':
     ensure  => present,
-    xpath   => '/configuration/location[@path="complete"]/system.webServer/isapiFilters',
+    xpath   => '/configuration/location[@path="complete"]/system.webserver/isapifilters',
     path    => 'c:\\windows\\system32\\inetsrv\\applicationHost.config',
     content => {
       value      => 'filter',
