@@ -90,13 +90,31 @@ class profile::win_base {
   #   notify  => Service['W3SVC'],
   # }
 
-# Add isapiFilters element to applicationHost.config
-  xmlfile { 'AddSalesQueryIsapi':
-    ensure  => present,
-    path    => 'C:/windows/system32/inetsrv/applicationHost.config',
-    xpath   => '/configuration/location[@path="complete"]/system.webServer/isapiFilters',
-    content => '<filter name="SalesQueryIsapi" path="c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll" preCondition="bitness32" />',
+  $mq_xml_file = 'C:/windows/system32/inetsrv/applicationHost.config'
+  xmlfile { $mq_xml_file:
+    ensure => present,
   }
+
+#   xmlfile_modification { 'test':
+#     file    => $mq_xml_file,
+#     changes => "set /beans/broker/transportConnectors/transportConnector[last()+1]/#attribute/name \"test\"",
+#     onlyif  => "match /beans/broker/transportConnectors/transportConnector[#attribute/name == \"test\"] size < 1",
+#   }
+
+#   xmlfile_modification { 'test2':
+#     file    => $mq_xml_file,
+#     changes => ["set /beans/broker/transportConnectors/transportConnector[last()+1]/#attribute/name \"tests\"",
+#     "set /beans/broker/transportConnectors/transportConnector[last()+1]/#attribute/value \"tests\""],
+#     onlyif  => ["match /beans/broker/transportConnectors/transportConnector[#attribute/name == \"tests\"] size < 1"],
+#   }
+
+# # Add isapiFilters element to applicationHost.config
+#   xmlfile { 'AddSalesQueryIsapi':
+#     ensure  => present,
+#     path    => 'C:/windows/system32/inetsrv/applicationHost.config',
+#     xpath   => '/configuration/location[@path="complete"]/system.webServer/isapiFilters',
+#     content => '<filter name="SalesQueryIsapi" path="c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll" preCondition="bitness32" />',
+#   }
 
   service { 'W3SVC':
     ensure => 'running',  # or 'stopped' to ensure it is stopped
