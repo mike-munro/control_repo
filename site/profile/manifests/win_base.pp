@@ -99,7 +99,7 @@ class profile::win_base {
     dsc_resource_name       => 'xWebConfigKeyValue',
     dsc_resource_module     => 'xWebAdministration',
     dsc_resource_properties => {
-      WebsitePath  => 'complete',
+      WebsitePath  => 'IIS:\\Sites\\complete',
       FilterName   => 'OutSystems ISAPI Filter',
       FilterPath   => $isapifilterpath,
       PreCondition => 'bitness64',
