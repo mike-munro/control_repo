@@ -116,9 +116,10 @@ class profile::win_base {
 #     provider => 'nuget',
 #   }
 
-  # Define the path for the ISAPI filter DLL
+# Define the path for the ISAPI filter DLL
   $isapifilterpath = 'E:/Apps/OutSystems/Platform Server/OsISAPIFilterx64.dll'
 
+# Manage IIS configuration using DSC
   dsc_xwebconfigkeyvalue { 'AddOutSystemsISAPIFilter':
     dsc_ensure        => 'present',
     dsc_configsection => "system.webServer/isapiFilters/add[@name='OutSystems ISAPI Filter']",
