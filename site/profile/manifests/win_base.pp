@@ -110,11 +110,11 @@ class profile::win_base {
     provider => 'chocolatey',
   }
 
-# Install the xWebAdministration module using NuGet
-  package { 'xWebAdministration':
-    ensure   => installed,
-    provider => 'nuget',
-  }
+# # Install the xWebAdministration module using NuGet
+#   package { 'xWebAdministration':
+#     ensure   => installed,
+#     provider => 'nuget',
+#   }
 
   # Define the path for the ISAPI filter DLL
   $isapifilterpath = 'E:/Apps/OutSystems/Platform Server/OsISAPIFilterx64.dll'
