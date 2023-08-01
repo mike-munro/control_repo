@@ -76,19 +76,34 @@ class profile::win_base {
   #   provider => 'powershell',
   # }
 
-  xml_fragment { 'SalesQueryIsapi':
-    ensure  => present,
-    xpath   => '/configuration/location[@path="complete"]/system.webServer/isapiFilters',
-    content => {
-      'filter' => {
-        '@name'        => 'SalesQueryIsapi',
-        '@path'        => 'c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll',
-        '@enabled'     => 'true',
-        '@enableCache' => 'true',
-      },
+  # xml_fragment { 'SalesQueryIsapi':
+  #   ensure  => present,
+  #   xpath   => '/configuration/location[@path="complete"]/system.webServer/isapiFilters',
+  #   content => {
+  #     'filter' => {
+  #       '@name'        => 'SalesQueryIsapi',
+  #       '@path'        => 'c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll',
+  #       '@enabled'     => 'true',
+  #       '@enableCache' => 'true',
+  #     },
+  #   },
+  #   path    => 'C:\\Windows\\System32\\Inetsrv\\Config\\ApplicationHost.config',
+  #   notify  => Service['W3SVC'],
+  # }
+
+# Define the path for the ISAPI filter DLL
+  $isapifilterpath = 'E:/Apps/OutSystems/Platform Server/OsISAPIFilterx64.dll'
+
+# Manage IIS configuration using DSC
+  dsc_lite { 'AddOutSystemsISAPIFilter':
+    dsc_resource_name       => 'xWebConfigKeyValue',
+    dsc_resource_module     => 'xWebAdministration',
+    dsc_resource_properties => {
+      WebsitePath  => 'complete',
+      FilterName   => 'OutSystems ISAPI Filter',
+      FilterPath   => $isapifilterpath,
+      PreCondition => 'bitness64',
     },
-    path    => 'C:\\Windows\\System32\\Inetsrv\\Config\\ApplicationHost.config',
-    notify  => Service['W3SVC'],
   }
 
   service { 'W3SVC':
