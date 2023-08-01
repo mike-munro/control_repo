@@ -120,11 +120,12 @@ class profile::win_base {
   $isapifilterpath = 'E:/Apps/OutSystems/Platform Server/OsISAPIFilterx64.dll'
 
 # Manage IIS configuration using DSC
-  dsc_xwebconfigkeyvalue { 'AddOutSystemsISAPIFilter':
-    dsc_ensure        => 'present',
-    dsc_websitepath   => 'IIS:\\Sites\\Default Web Site',
-    dsc_configsection => 'system.webServer/isapiFilters/add',
-    dsc_key           => "name='OutSystems ISAPI Filter'",
-    dsc_value         => "path='${isapifilterpath}', preCondition='bitness64'",
+  dsc_xwebelement { 'AddOutSystemsISAPIFilter':
+    dsc_ensure       => 'Present',
+    dsc_websitepath  => 'IIS:\\Sites\\Default Web Site',
+    dsc_filtername   => 'OutSystems ISAPI Filter',
+    dsc_path         => $isapifilterpath,
+    dsc_precondition => 'bitness64',
+    dsc_sectionpath  => 'system.webServer/isapiFilters',
   }
 }
