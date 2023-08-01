@@ -92,7 +92,7 @@ class profile::win_base {
 
   xml_fragment { 'SalesQueryIsapi':
     ensure  => present,
-    xpath   => '/configuration/location/system.webServer/isapiFilters',
+    xpath   => '/configuration/location[@path="complete"]/system.webServer/isapiFilters',
     path    => 'c:\\windows\\system32\\inetsrv\\applicationHost.config',
     content => {
       value      => 'filter',
@@ -102,10 +102,5 @@ class profile::win_base {
         '@preCondition' => 'bitness32',
       },
     },
-  }
-
-  service { 'W3SVC':
-    ensure => 'running',  # or 'stopped' to ensure it is stopped
-    enable => true,       # Set to true to start the service at system boot
   }
 }
