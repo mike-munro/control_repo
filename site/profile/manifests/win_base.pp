@@ -113,11 +113,10 @@ class profile::win_base {
   # Define the path for the ISAPI filter DLL
   $isapifilterpath = 'E:/Apps/OutSystems/Platform Server/OsISAPIFilterx64.dll'
 
-  dsc_xwebconfigpropertycollection { 'AddOutSystemsISAPIFilter':
-    websitepath  => 'Default Web Site',
-    filtername   => 'OutSystems ISAPI Filter',
-    filterpath   => $isapifilterpath,
-    precondition => 'bitness64',
-    provider     => 'powershell',
+  dsc_xwebconfigkeyvalue { 'AddOutSystemsISAPIFilter':
+    dsc_ensure        => 'present',
+    dsc_configsection => "system.webServer/isapiFilters/add[@name='OutSystems ISAPI Filter']",
+    dsc_value         => "path='${isapifilterpath}', preCondition='bitness64'",
+    dsc_websitepath   => 'Default Web Site',
   }
 }
