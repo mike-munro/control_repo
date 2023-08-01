@@ -86,7 +86,7 @@ class profile::win_base {
         '@preCondition' => 'bitness32',
       },
     },
-    path    => 'C:\\Windows\\System32\\Inetsrv\\Config\\ApplicationHost.config',
+    path    => 'C:\\temp\\ApplicationHost.config',
     #notify  => Service['W3SVC'],
   }
 
