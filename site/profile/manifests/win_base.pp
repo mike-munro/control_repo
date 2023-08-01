@@ -83,6 +83,7 @@ class profile::win_base {
       'filter' => {
         '@name' => 'SalesQueryIsapi',
         '@path' => 'c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll',
+        '@preCondition' => 'bitness32',
       },
     },
     path    => 'C:\\Windows\\System32\\Inetsrv\\Config\\ApplicationHost.config',
