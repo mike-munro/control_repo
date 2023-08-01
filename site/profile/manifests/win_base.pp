@@ -76,22 +76,16 @@ class profile::win_base {
   #   provider => 'powershell',
   # }
 
-  xml_fragment { 'SalesQueryIsapi':
-    ensure  => present,
-    xpath   => '/configuration/location/system.webServer/isapiFilters',
-    content => {
-      'filter' => {
-        '@name'         => 'SalesQueryIsapi',
-        #'@path'         => 'c:/Inetpub/minimal/filters/SalesQueryIsapi.dll',
-        '@preCondition' => 'bitness32',
-      },
-    },
-    path    => 'C:\\temp\\ApplicationHost.config',
-    #notify  => Service['W3SVC'],
-  }
-
-  service { 'W3SVC':
-    ensure => 'running',  # or 'stopped' to ensure it is stopped
-    enable => true,       # Set to true to start the service at system boot
-  }
+xml_fragment { 'Default_Web_Site':
+  ensure  => present,
+  path    => 'C:\\Windows\\System32\\inetsrv\\applicationHostConfig.config'
+  xpath   => '/configuration/location[@path=\"Default Web Site\"]/system.webServer',
+  content => '
+    <staticContent>
+        <clientCache cacheControlMode="UseMaxAge" cacheControlMaxAge="30.00:00:00" />
+    </staticContent>
+    <isapiFilters>
+        <filter name=\"OutSystems ISAPI Filter\" path=\"E:\\Apps\\OutSystems\\Platform Server\\OsISAPIFilterx64.dll\" preCondition=\"bitness64\" /> # lint:ignore:140chars
+    </isapiFilters>',
+  notify  => Service['W3SVC'],
 }
