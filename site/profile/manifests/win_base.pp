@@ -87,7 +87,7 @@ class profile::win_base {
       },
     },
     path    => 'C:\\Windows\\System32\\Inetsrv\\Config\\ApplicationHost.config',
-    notify  => Service['W3SVC'],
+    #notify  => Service['W3SVC'],
   }
 
   service { 'W3SVC':
