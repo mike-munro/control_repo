@@ -82,7 +82,7 @@ class profile::win_base {
     content => {
       'filter' => {
         '@name'         => 'SalesQueryIsapi',
-        '@path'         => 'c:/Inetpub/minimal/filters/SalesQueryIsapi.dll',
+        #'@path'         => 'c:/Inetpub/minimal/filters/SalesQueryIsapi.dll',
         '@preCondition' => 'bitness32',
       },
     },
