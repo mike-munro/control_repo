@@ -81,10 +81,8 @@ class profile::win_base {
     xpath   => '/configuration/location[@path="complete"]/system.webServer/isapiFilters',
     content => {
       'filter' => {
-        '@name'        => 'SalesQueryIsapi',
-        '@path'        => 'c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll',
-        '@enabled'     => 'true',
-        '@enableCache' => 'true',
+        '@name' => 'SalesQueryIsapi',
+        '@path' => 'c:\\Inetpub\\minimal\\filters\\SalesQueryIsapi.dll',
       },
     },
     path    => 'C:\\Windows\\System32\\Inetsrv\\Config\\ApplicationHost.config',
