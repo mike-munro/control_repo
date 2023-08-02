@@ -116,16 +116,16 @@ class profile::win_base {
 #     provider => 'nuget',
 #   }
 
-# Define the path for the ISAPI filter DLL
-  $isapifilterpath = 'E:/Apps/OutSystems/Platform Server/OsISAPIFilterx64.dll'
+# # Define the path for the ISAPI filter DLL
+#   $isapifilterpath = 'E:/Apps/OutSystems/Platform Server/OsISAPIFilterx64.dll'
 
-# Manage IIS configuration using DSC
-  dsc_xwebelement { 'AddOutSystemsISAPIFilter':
-    dsc_ensure       => 'Present',
-    dsc_websitepath  => 'IIS:\\Sites\\Default Web Site',
-    dsc_filtername   => 'OutSystems ISAPI Filter',
-    dsc_path         => $isapifilterpath,
-    dsc_precondition => 'bitness64',
-    dsc_sectionpath  => 'system.webServer/isapiFilters',
-  }
+# # Manage IIS configuration using DSC
+#   dsc_xwebelement { 'AddOutSystemsISAPIFilter':
+#     dsc_ensure       => 'Present',
+#     dsc_websitepath  => 'IIS:\\Sites\\Default Web Site',
+#     dsc_filtername   => 'OutSystems ISAPI Filter',
+#     dsc_path         => $isapifilterpath,
+#     dsc_precondition => 'bitness64',
+#     dsc_sectionpath  => 'system.webServer/isapiFilters',
+#   }
 }
