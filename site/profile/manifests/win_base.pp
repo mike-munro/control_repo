@@ -104,11 +104,11 @@ class profile::win_base {
   #   },
   # }
 
-# Install the NuGet package provider for Puppet
-  package { 'nuget':
-    ensure   => installed,
-    provider => 'chocolatey',
-  }
+# # Install the NuGet package provider for Puppet
+#   package { 'nuget':
+#     ensure   => installed,
+#     provider => 'chocolatey',
+#   }
 
 # # Install the xWebAdministration module using NuGet
 #   package { 'xWebAdministration':
