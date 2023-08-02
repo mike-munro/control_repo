@@ -1,5 +1,8 @@
 #
 class profile::powershell {
+  # Lookup the modules to be installed from Hiera data
+  $modules_to_install = lookup('profile::powershell::modules_to_install', Array[String], [])
+
   # Install NuGet Package Provider
   exec { 'install_nuget_provider':
     command  => 'Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force',
