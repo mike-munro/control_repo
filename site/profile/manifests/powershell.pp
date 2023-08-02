@@ -25,7 +25,7 @@ class profile::powershell {
     exec { "install_${module}_module":
       command  => "Install-Module -Name ${module} -Force -SkipPublisherCheck",
       provider => 'powershell',
-      creates  => "C:/Program Files/PackageManagement/ProviderAssemblies/NuGet/2.8.5.208/${module}",
+      unless   => "Get-Command '*' -Module ${module} -ErrorAction SilentlyContinue",
     }
   }
 }
