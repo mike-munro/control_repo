@@ -5,6 +5,10 @@ defaults:
   data_hash: yaml_data
 hierarchy:
   - name: "Per-node data"
-    path: "nodes/%{::trusted.certname}.yaml"
+    path: "nodes/%{trusted.certname}.yaml"
+
+  - name: "Per-OS defaults"
+    path: "os/%{facts.os.family}.yaml"
+
   - name: "Common data"
     path: "common.yaml"

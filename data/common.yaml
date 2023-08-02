@@ -1,1 +1,4 @@
+# /etc/puppetlabs/code/environments/production/data/common.yaml
 ---
+profile::hiera_test::ssl: false
+profile::hiera_test::backups_enabled: true

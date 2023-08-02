@@ -1,4 +1,5 @@
 node default {
+  include profile::hiera_test
 }
 
 node 'master.puppet.vm' {
