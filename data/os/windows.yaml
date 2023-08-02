@@ -1,1 +1,4 @@
- profile::powershell::modules_to_install: ['carbon.iis','carbon','Puppet.Dsc']
+profile::powershell::modules_to_install:
+  - 'carbon.iis'
+  - 'carbon'
+  - 'Puppet.Dsc'
