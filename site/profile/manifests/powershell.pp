@@ -10,6 +10,6 @@ class profile::powershell {
   exec { 'install_nuget_module':
     command  => 'Install-Module -Name NuGet -Force -SkipPublisherCheck',
     provider => 'powershell',
-    creates  => 'C:/Program Files/PowerShell/Modules/NuGet',
+    creates  => 'C:/Program Files/PackageManagement/ProviderAssemblies/NuGet/2.8.5.208',
   }
 }
